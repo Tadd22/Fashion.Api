@@ -40,13 +40,13 @@ namespace Fashion.Api.Controllers
 		{
 			_context.BespokeItems.Add(item);
 			await _context.SaveChangesAsync();
-			return CreatedAtAction(nameof(GetBespokeItem), new { id = item.Id }, item);
+			return CreatedAtAction(nameof(GetBespokeItem), new { id = item.BespokeID}, item);
 		}
 
 		[HttpPut("{id}")]
 		public async Task<IActionResult> UpdateBespokeItem(int id, Bespoke item)
 		{
-			if (id != item.Id)
+			if (id != item.BespokeID)
 			{
 				return BadRequest();
 			}
@@ -59,7 +59,7 @@ namespace Fashion.Api.Controllers
 			}
 			catch (DbUpdateConcurrencyException)
 			{
-				if (!_context.BespokeItems.Any(e => e.Id == id))
+				if (!_context.BespokeItems.Any(e => e.BespokeID == id))
 				{
 					return NotFound();
 				}
